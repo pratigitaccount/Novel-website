@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apology to [Girlfriend's Name]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 400px; /* Set your desired width */
+            margin: 0 auto; /* Center the content */
+        }
+
+        section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2, h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .movable-option {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section id="questionSlide">
+            <h2>Is your name Novel?</h2>
+            <button onclick="showYesContent()">Yes</button>
+            <button id="noButton" class="movable-option" onmousedown="enableNoMovement()" onmouseup="disableNoMovement()" onmouseout="disableNoMovement()">No</button>
+        </section>
+
+        <section id="yesContent" style="display:none;">
+            <h2>It seems you are angry!</h2>
+            <button onclick="showSecondSlideYesContent()">Yes</button>
+            <button onclick="showSecondSlideNoContent()">No</button>
+            <!-- Add more content for the "Yes" option -->
+        </section>
+
+        <section id="noContent" style="display:none;">
+            <h2>Thank you so much, I love you.</h2>
+            <h3>Are you angry on me?</h3>
+            <button onclick="showAngryYesContent()">Yes</button>
+            <button onclick="showAngryNoContent()">No</button>
+        </section>
+
+        <section id="angryYesContent" style="display:none;">
+            <h3>Oh no! What did I do? Let's talk about it.</h3>
+            <!-- Add more content for the "Yes" option when angry -->
+        </section>
+
+        <section id="angryNoContent" style="display:none;">
+            <h3>Phew! That's a relief. Let's make things better.</h3>
+            <h3>Are you angry at me?</h3>
+            <button onclick="showSecondSlideYesContent()">Yes</button>
+            <button onclick="showSecondSlideNoContent()">No</button>
+        </section>
+
+        <section id="secondSlideContent" style="display:none;">
+            <h3 id="apologyMessage" style="display:none;">Meri gustakhiyon ko tum maaf karna, Dil tumhe tumhari ijazat ke bina bhi yaad karta hai….!! I love you so much babe</h3>
+            <h3 id="gratitudeMessage" style="display:none;">Thank you, babe! I love you so much.</h3>
+        </section>
+    </main>
+
+    <script>
+        let noMovementEnabled = false;
+
+        function showYesContent() {
+            const yesContent = document.getElementById("yesContent");
+            const noContent = document.getElementById("noContent");
+            const questionSlide = document.getElementById("questionSlide");
+
+            yesContent.style.display = "block";
+            noContent.style.display = "none";
+            questionSlide.style.display = "none";
+
+            document.getElementById("noButton").style.display = "none";
+
+            // Add more actions for the "Yes" option if needed
+        }
+
+        function enableNoMovement() {
+            noMovementEnabled = true;
+            moveNoButton(); // Call initially to set position
+        }
+
+        function disableNoMovement() {
+            noMovementEnabled = false;
+        }
+
+        function moveNoButton() {
+            if (noMovementEnabled) {
+                const noButton = document.getElementById("noButton");
+
+                // Calculate a random position within a smaller region
+                const maxX = 320; // Adjust the width of the region as needed
+                const maxY = 400; // Adjust the height of the region as needed
+
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+
+                noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+                // Keep the button within the smaller region continuously
+                requestAnimationFrame(moveNoButton);
+            }
+        }
+
+        function showAngryYesContent() {
+            const angryYesContent = document.getElementById("angryYesContent");
+            const noContent = document.getElementById("noContent");
+
+            angryYesContent.style.display = "block";
+            noContent.style.display = "none";
+
+            // Add content for the "Yes" option when angry
+        }
+
+        function showAngryNoContent() {
+            const angryNoContent = document.getElementById("angryNoContent");
+            const noContent = document.getElementById("noContent");
+
+            angryNoContent.style.display = "block";
+            noContent.style.display = "none";
+
+            // Add content for the "No" option when not angry
+        }
+
+        function showSecondSlideYesContent() {
+            const secondSlideContent = document.getElementById("secondSlideContent");
+            const sorryImage = document.getElementById("sorryImage");
+
+            secondSlideContent.style.display = "block";
+
+            // Add content for the "Yes" option in the second slide
+            document.getElementById("apologyMessage").style.display = "block";
+            document.getElementById("gratitudeMessage").style.display = "none";
+            sorryImage.src = "C:/Users/003SEN744/Downloads/rose.jpg";
+            sorryImage.style.display = "block";
+        }
+
+        function showSecondSlideNoContent() {
+            const secondSlideContent = document.getElementById("secondSlideContent");
+            const sorryImage = document.getElementById("sorryImage");
+
+            secondSlideContent.style.display = "block";
+
+            // Add content for the "No" option in the second slide
+            document.getElementById("apologyMessage").style.display = "none";
+            document.getElementById("gratitudeMessage").style.display = "block";
+            sorryImage.style.display = "none";
+        }
+    </script>
+</body>
+</html>
